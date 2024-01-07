@@ -1,8 +1,9 @@
 const button1 = document.getElementById("button1");
-let audio1 = new Audio("track1.mp3");
+let audio1 = new Audio("healspell2.mp3");
 
 const container = document.getElementById("container");
 const canvas = document.getElementById("canvas1");
+const file = document.getElementById("fileupload");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 const ctx = canvas.getContext("2d");
@@ -31,13 +32,29 @@ container.addEventListener("click", function () {
     let x = 0;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     analyser.getByteFrequencyData(dataArray);
-    for (let i = 0; i < bufferLength; i++) {
-      barHeight = dataArray[i];
-      ctx.fillStyle = "purple";
-      ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-      x += barWidth;
-    }
+    drawVisualizer(bufferLength, x, barWidth, barHeight, dataArray);
     requestAnimationFrame(animate);
   }
   animate();
 });
+
+file.addEventListener("change", function () {
+  const files = this.files;
+  const audio1 = document.getElementById("audio1");
+  audio1.src = URL.createObjectURL(files[0]);
+  audio1.load();
+  audio1.play();
+});
+
+function drawVisualizer(bufferLength, x, barWidth, barHeight, dataArray) {
+  for (let i = 0; i < bufferLength; i++) {
+    barHeight = dataArray[i];
+    const red = i * barHeight/20;
+    const green = i * 4;
+    const blue = barHeight/2;
+
+    ctx.fillStyle = `rgb(${red},${green},${blue}`;
+    ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+    x += barWidth;
+  }
+}

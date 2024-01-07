@@ -18,3 +18,10 @@
   margin: 0 auto;
   display: block;
 }
+
+#fileupload {
+  position: absolute;
+  top: 150px;
+  color: white;
+
+}
