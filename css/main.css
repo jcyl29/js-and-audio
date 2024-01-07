@@ -11,7 +11,17 @@
   background: black;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+}
+
+#canvas1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(1px) contrast(20);
+  /* this high value makes it look like a kaleidoscope */
+  /*filter: blur(60px) contrast(20);*/
 }
 
 #audio1 {
@@ -24,5 +34,4 @@
   position: absolute;
   top: 150px;
   color: white;
-
 }
