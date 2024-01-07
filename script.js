@@ -25,7 +25,7 @@ container.addEventListener("click", function () {
 
   const dataArray = new Uint8Array(bufferLength);
 
-  const barWidth = canvas.width / bufferLength;
+  const barWidth = canvas.width / 2 / bufferLength;
   let barHeight;
 
   function animate() {
@@ -49,9 +49,25 @@ file.addEventListener("change", function () {
 function drawVisualizer(bufferLength, x, barWidth, barHeight, dataArray) {
   for (let i = 0; i < bufferLength; i++) {
     barHeight = dataArray[i];
-    const red = i * barHeight/20;
+    const red = (i * barHeight) / 20;
     const green = i * 4;
-    const blue = barHeight/2;
+    const blue = barHeight / 2;
+
+    ctx.fillStyle = `rgb(${red},${green},${blue}`;
+    ctx.fillRect(
+      canvas.width / 2 - x,
+      canvas.height - barHeight,
+      barWidth,
+      barHeight,
+    );
+    x += barWidth;
+  }
+
+  for (let i = 0; i < bufferLength; i++) {
+    barHeight = dataArray[i];
+    const red = (i * barHeight) / 20;
+    const green = i * 4;
+    const blue = barHeight / 2;
 
     ctx.fillStyle = `rgb(${red},${green},${blue}`;
     ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
