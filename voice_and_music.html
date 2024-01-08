@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Audio player</title>
+    <link rel="stylesheet" href="css/voice_music.css" />
+    <script type="module" src="./microphone.js"></script>
+    <script type="module" src="./visualizer.js"></script>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+    <script type="module">
+      import main from "./visualizer.js";
+      document.addEventListener("DOMContentLoaded", async function () {
+        await main();
+      });
+    </script>
+  </body>
+</html>
